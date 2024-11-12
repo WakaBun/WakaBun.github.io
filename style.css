@@ -1,0 +1,138 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    background-color:#5d1ba0;
+    color: white;
+    padding: 100px 0;
+}
+
+.header .name {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+.header .title {
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.header .description {
+    margin: 20px 0;
+}
+
+.header .btn {
+    padding: 10px 20px;
+    background-color: #2c88c1;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.header .btn:hover {
+    background-color: #82b6ed;
+    color: rgb(0, 0, 0);
+}
+
+/* Sections */
+section {
+    margin: 50px 0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #074e61;
+}
+
+/* About Section */
+.about p {
+    max-width: 600px;
+    margin: auto;
+}
+
+/* Skills Section */
+.skills .skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.skills .skill {
+    background-color: #5d1ba0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+/* Skill Button Styling */
+.skill-btn {
+    background-color: #5d1ba0;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.skill-btn:hover {
+    background-color: #c7b4db;
+}
+
+/* Projects Section */
+.projects .project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.project {
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Experience Section */
+.experience-item {
+    margin: 20px 0;
+}
+
+/* Contact Section */
+.contact-btn {
+    display: inline-block;
+    margin: 10px 5px;
+    padding: 10px 20px;
+    color: white;
+    background-color: #5d1ba0;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.contact-btn:hover {
+    background-color: #5d1ba0;
+}

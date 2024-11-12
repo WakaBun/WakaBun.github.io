@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bar Chart with Transitions</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .bar {
+      fill: steelblue;
+    }
+    .label {
+      fill: white;
+      text-anchor: middle;
+    }
+  </style>
+</head>
+<body>
+  <h2>Dynamic Bar Chart with Transitions</h2>
+  <div id="chart"></div>
+  <button onclick="updateData()">Update Data</button>
+
+  <script>
+    const data1 = [
+      {name: "A", value: 30},
+      {name: "B", value: 80},
+      {name: "C", value: 45},
+      {name: "D", value: 60},
+      {name: "E", value: 20},
+      {name: "F", value: 90},
+      {name: "G", value: 50},
+    ];
+
+    const data2 = [
+      {name: "A", value: 20},
+      {name: "B", value: 90},
+      {name: "C", value: 60},
+      {name: "D", value: 30},
+      {name: "E", value: 80},
+      {name: "F", value: 45},
+      {name: "G", value: 70},
+    ];
+
+    let currentData = data1;
+
+    const margin = {top: 20, right: 30, bottom: 40, left: 40};
+    const width = 600 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
+
+    const svg = d3.select("#chart")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const x = d3.scaleBand()
+      .domain(data1.map(d => d.name))
+      .range([0, width])
+      .padding(0.1);
+
+    const y = d3.scaleLinear()
+      .domain([0, 100])
+      .nice()
+      .range([height, 0]);
+
+    svg.append("g")
+      .attr("class", "x-axis")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x));
+
+    svg.append("g")
+      .attr("class", "y-axis")
+      .call(d3.axisLeft(y));
+
+    function updateChart(data) {
+      const bars = svg.selectAll(".bar")
+        .data(data, d => d.name);
+
+      bars.join(
+        enter => enter.append("rect")
+          .attr("class", "bar")
+          .attr("x", d => x(d.name))
+          .attr("width", x.bandwidth())
+          .attr("y", height)
+          .attr("height", 0)
+          .call(enter => enter.transition()
+            .duration(750)
+            .attr("y", d => y(d.value))
+            .attr("height", d => height - y(d.value))),
+        update => update
+          .call(update => update.transition()
+            .duration(750)
+            .attr("y", d => y(d.value))
+            .attr("height", d => height - y(d.value))),
+        exit => exit
+          .call(exit => exit.transition()
+            .duration(750)
+            .attr("y", height)
+            .attr("height", 0)
+            .remove())
+      );
+    }
+
+    updateChart(currentData);
+
+    function updateData() {
+      currentData = currentData === data1 ? data2 : data1;
+      updateChart(currentData);
+    }
+  </script>
+</body>
+</html>
+
